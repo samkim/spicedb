@@ -148,3 +148,7 @@ func (ddm delegateDispatchMock) DispatchLookup(ctx context.Context, req *v1.Disp
 func (ddm delegateDispatchMock) Close() error {
 	return nil
 }
+
+func (ddm delegateDispatchMock) Ready() bool {
+	return true
+}

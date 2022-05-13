@@ -97,6 +97,7 @@ func NewDispatcher(options ...Option) (dispatch.Dispatcher, error) {
 	redispatch := graph.NewDispatcher(cachingRedispatch)
 
 	// If an upstream is specified, create a cluster dispatcher.
+	var conn *grpc.ClientConn
 	if opts.upstreamAddr != "" {
 		if opts.upstreamCAPath != "" {
 			// Ensure that the CA path exists.
@@ -110,11 +111,11 @@ func NewDispatcher(options ...Option) (dispatch.Dispatcher, error) {
 			opts.grpcDialOpts = append(opts.grpcDialOpts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 		}
 
-		conn, err := grpc.Dial(opts.upstreamAddr, opts.grpcDialOpts...)
+		conn, err = grpc.Dial(opts.upstreamAddr, opts.grpcDialOpts...)
 		if err != nil {
 			return nil, err
 		}
-		redispatch = remote.NewClusterDispatcher(v1.NewDispatchServiceClient(conn), &keys.CanonicalKeyHandler{})
+		redispatch = remote.NewClusterDispatcher(v1.NewDispatchServiceClient(conn), conn, &keys.CanonicalKeyHandler{})
 	}
 
 	cachingRedispatch.SetDelegate(redispatch)

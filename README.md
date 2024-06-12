@@ -24,7 +24,7 @@ Features that distinguish SpiceDB from other systems include:
 
 [gRPC]: https://buf.build/authzed/api/docs/main:authzed.api.v1
 [Zanzibar]: https://authzed.com/blog/what-is-zanzibar/
-[HTTP]: https://app.swaggerhub.com/apis-docs/authzed/authzed/1.0
+[HTTP]: https://www.postman.com/authzed/workspace/spicedb/overview
 [Google's Zanzibar paper]: https://authzed.com/blog/what-is-zanzibar/
 [per-request]: https://docs.authzed.com/reference/api-consistency
 [New Enemy Problem]: https://authzed.com/blog/new-enemies/
